@@ -2,6 +2,10 @@ import React from 'react';
 import './Navbar.css';
 
 const Navbar = () => {
+
+  const reloadPage = () => {
+    window.location.reload()
+  }
   return (
     <nav className="navbar">
       <div className="navbar-logo">CNAPP Dashboard</div>
@@ -9,7 +13,7 @@ const Navbar = () => {
         <button className="navbar-add-widget">
           Add Widget +
         </button>
-        <button className="navbar-reload">
+        <button onClick={reloadPage} className="navbar-reload">
           ↻
         </button>
       </div>

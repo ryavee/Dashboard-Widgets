@@ -1,16 +1,17 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import Donut from './components/Donut';
 import './App.css';
+import Navbar from './components/Navbar';
+import Donut from './components/Donut/Donut';
+import Emptywidget from './components/Emptywidget/Emptywidget';
+import Registry from './components/Registry/Registry';
 
 const App = () => {
   return (
     <div className="App">
       <Navbar />
       <Donut />
-      {/* <BarChart/> */}
-      {/* <HorizontalBarChart /> */}
-      {/* Other components*/}
+      <Emptywidget />
+      < Registry />
     </div>
   );
 };

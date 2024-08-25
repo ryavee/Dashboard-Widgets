@@ -1,0 +1,139 @@
+.registry {
+  padding: 20px;
+  background-color: #f0f0f5;
+}
+
+.registry-title {
+  font-size: 1.3rem;
+  text-align: left;
+  margin-bottom: 20px;
+  margin-left: 5px;
+  margin-top: -20px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.registry-card {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  position: relative;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  min-height: 200px; /* Ensure cards have a minimum height */
+  max-width: 400px; /* Consistent card width */
+}
+
+.registry-card-title {
+  font-size: 1.2rem;
+  margin-top: -10px;
+  text-align: left;
+}
+
+.registry-summary {
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: left;
+  margin-top: -2px;
+}
+
+.registry-summary span {
+  font-weight: bold;
+}
+
+.horizontal-bar {
+  display: flex;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.chart-bar {
+  height: 100%;
+}
+
+.registry-legend {
+  margin-left: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  border-radius: 3px;
+}
+
+/* Remove Widget Button */
+.remove-widget {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: red;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 20px;
+}
+
+.registry-card:hover .remove-widget {
+  display: block;
+}
+
+.remove-widget:hover {
+  background-color: darkred;
+}
+
+/* Add Widget Button */
+.add-widget {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px 20px;
+  background-color: #f9fafb;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-widget:hover {
+  background-color: #f0f0f0;
+}
+
+/* Empty card styling for + Add Widget */
+.empty-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px; /* Match the height of other cards */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}

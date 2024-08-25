@@ -1,0 +1,143 @@
+/* donut.css*/
+.donut-container {
+  padding: 20px;
+  background-color: #f0f0f5;
+  border-radius: 8px;
+}
+
+.donut-heading {
+  font-size: 1.3rem;
+  text-align: left;
+  margin-bottom: 20px;
+  margin-left: 5px;
+  margin-top: -20px;
+}
+
+.donut-cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Card Styles */
+.donut-card {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  position: relative;
+  flex: 1;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  max-width: 400px; /* Reduced card width */
+  display: flex;
+  flex-direction: column;
+}
+
+.donut-card-title {
+  font-size: 1.2rem;
+  margin-top: -10px;
+  text-align: left;
+}
+
+.donut-card-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Donut Chart Styles */
+.donut-chart-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.donut-chart-total {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.donut-legend-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.donut-legend-item {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.donut-legend-color-box {
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  background-color: #000; /* Will be overridden by inline styles */
+  border-radius: 3px;
+}
+
+/* Add Widget Card */
+.donut-add-widget-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px; /* Adjust as needed */
+  border: 1px solid #ddd; /* Match the border of other cards */
+  border-radius: 6px;
+  background-color: #fff; /* Match the background color of other cards */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+}
+
+/* Add Widget Button */
+.donut-add-widget-button {
+  border: 1px solid #ddd; /* Visible border color */
+  border-radius: 6px;
+  padding: 10px 20px;
+  background-color: #f9fafb;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.donut-add-widget-button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Remove Widget Button */
+.donut-remove-widget {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: red;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 20px;
+}
+
+.donut-card:hover .donut-remove-widget {
+  display: block;
+}
+
+.donut-remove-widget:hover {
+  background-color: darkred;
+}
+
