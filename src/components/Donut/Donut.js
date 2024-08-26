@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Donut.css';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import Sidebar from './Sidebar'; // Make sure to import Sidebar component
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -109,6 +110,8 @@ const Donut = () => {
     },
   ]);
 
+  const [sidebarOpen, setSidebarOpen] = useState(false); // State to manage sidebar visibility
+
   // Remove a widget
   const removeWidget = (id) => {
     setWidgets(widgets.filter(widget => widget.id !== id));
@@ -116,8 +119,33 @@ const Donut = () => {
 
   // Handle adding a new widget
   const handleAddWidget = () => {
-    // Logic to handle adding a widget
-    console.log('Add Widget clicked');
+    setSidebarOpen(true); // Open the sidebar
+  };
+
+  // Handle sidebar close
+  const handleCloseSidebar = () => {
+    setSidebarOpen(false); // Close the sidebar
+  };
+
+  // Handle submit of new widget data
+  const handleSubmit = (data) => {
+    const newWidget = {
+      id: widgets.length + 1,
+      title: data.title,
+      data: {
+        labels: data.items.map(item => item.name),
+        datasets: [
+          {
+            data: data.items.map(item => Number(item.number)),
+            backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0'],
+            hoverBackgroundColor: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0'],
+          },
+        ],
+      },
+      total: data.items.reduce((acc, item) => acc + Number(item.number), 0),
+    };
+
+    setWidgets([...widgets, newWidget]); // Add new widget to the list
   };
 
   return (
@@ -136,6 +164,14 @@ const Donut = () => {
         ))}
         <AddWidgetCard onAdd={handleAddWidget} />
       </div>
+
+      {/* Render the sidebar when sidebarOpen is true */}
+      {sidebarOpen && (
+        <Sidebar
+          onClose={handleCloseSidebar}
+          onSubmit={handleSubmit}
+        />
+      )}
     </div>
   );
 };

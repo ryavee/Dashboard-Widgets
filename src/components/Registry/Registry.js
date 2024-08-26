@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './Registry.css';
+import RegistrySidebar from './RegistrySidebar'; // Import the sidebar component
 
-// Data for the charts
 const initialData = {
   1: {
     id: 1,
     title: 'Image Risk Assessment',
+    subtitle: 'Total Vulnerabilities',
     total: 1470,
     categories: [
       { name: 'Critical', count: 9, color: '#dc3545' },
@@ -17,6 +18,7 @@ const initialData = {
   2: {
     id: 2,
     title: 'Image Security Issues',
+    subtitle: 'Total Images',
     total: 20,
     categories: [
       { name: 'Critical', count: 3, color: '#dc3545' },
@@ -29,17 +31,39 @@ const initialData = {
 
 const Registry = () => {
   const [data, setData] = useState(initialData);
+  const [showSidebar, setShowSidebar] = useState(false);
 
-  // Function to calculate the total percentage width for each category
   const calculateWidth = (category, total) => {
     return `${(category.count / total) * 100}%`;
   };
 
-  // Function to remove a card
   const removeCard = (id) => {
     const updatedData = { ...data };
     delete updatedData[id];
     setData(updatedData);
+  };
+
+  const handleSidebarClose = () => {
+    setShowSidebar(false);
+  };
+
+  const handleSidebarSubmit = (newData) => {
+    const newId = Object.keys(data).length + 1;
+    const total = newData.items.reduce((sum, item) => sum + parseInt(item.number, 10), 0);
+
+    const chartData = {
+      id: newId,
+      title: newData.title,
+      subtitle: `${total} ${newData.subtitle}`, // Ensure total appears correctly
+      total,
+      categories: newData.items.map(item => ({
+        name: item.name,
+        count: parseInt(item.number, 10),
+        color: '#' + Math.floor(Math.random()*16777215).toString(16), // Random color for each category
+      })),
+    };
+
+    setData({ ...data, [newId]: chartData });
   };
 
   return (
@@ -50,19 +74,17 @@ const Registry = () => {
           <div key={chartData.id} className="registry-card">
             <h2 className="registry-card-title">{chartData.title}</h2>
             <p className="registry-summary">
-              <span>{chartData.total}</span> Total {chartData.title.includes('Risk') ? 'Vulnerabilities' : 'Images'}
+              <span>{chartData.total}</span> {chartData.subtitle}
             </p>
 
-            {/* Remove Widget Button */}
             <button className="remove-widget" onClick={() => removeCard(chartData.id)}>
               &times;
             </button>
 
-            {/* Horizontal Bar */}
             <div className="horizontal-bar">
               {chartData.categories.map((category) => (
                 <div
-                  key={category.name} // Use category name as a unique identifier
+                  key={category.name}
                   className="chart-bar"
                   style={{
                     width: calculateWidth(category, chartData.total),
@@ -72,7 +94,6 @@ const Registry = () => {
               ))}
             </div>
 
-            {/* Legend */}
             <div className="registry-legend">
               {chartData.categories.map((category) => (
                 <div key={category.name} className="legend-item">
@@ -87,11 +108,19 @@ const Registry = () => {
           </div>
         ))}
 
-        {/* Add Widget Card */}
         <div className="registry-card empty-card">
-          <button className="add-widget">+ Add Widget</button>
+          <button className="add-widget" onClick={() => setShowSidebar(true)}>
+            + Add Widget
+          </button>
         </div>
       </div>
+
+      {showSidebar && (
+        <RegistrySidebar
+          onClose={handleSidebarClose}
+          onSubmit={handleSidebarSubmit}
+        />
+      )}
     </div>
   );
 };

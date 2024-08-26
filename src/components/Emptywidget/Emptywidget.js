@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import './Emptywidget.css';
-import analysisIcon from './analysis.png'; // Ensure this path is correct
+import analysisIcon from './analysis.png'; 
+import EmptyWidgetSidebar from './EmptyWidgetSidebar'; // Import the new sidebar
 
 const Emptywidget = () => {
   const [widgets, setWidgets] = useState([
     { id: 1, title: 'Top 5 Namespace Specific Alerts' },
     { id: 2, title: 'Workload Alerts' },
   ]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const removeWidget = (id) => {
     setWidgets(widgets.filter(widget => widget.id !== id));
   };
 
-  const handleAddWidget = () => {
-    // Logic to handle adding a widget
-    console.log('Add Widget clicked');
+  const addWidget = (title) => {
+    const newWidget = {
+      id: widgets.length + 1,
+      title,
+    };
+    setWidgets([...widgets, newWidget]);
+    setIsSidebarOpen(false); // Close sidebar after adding
   };
 
   return (
@@ -24,7 +30,7 @@ const Emptywidget = () => {
         {widgets.map(widget => (
           <div key={widget.id} className="card">
             <button className="remove-widget" onClick={(e) => {
-              e.stopPropagation(); // Prevent click event on button from bubbling up to card
+              e.stopPropagation();
               removeWidget(widget.id);
             }}>
               &times;
@@ -43,11 +49,18 @@ const Emptywidget = () => {
 
         {/* Add Widget Card */}
         <div className="card add-widget-card">
-          <button className="add-widget-button" onClick={handleAddWidget}>
+          <button className="add-widget-button" onClick={() => setIsSidebarOpen(true)}>
             <span>+ Add Widget</span>
           </button>
         </div>
       </div>
+
+      {/* Sidebar */}
+      <EmptyWidgetSidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        onAddWidget={addWidget}
+      />
     </div>
   );
 };
